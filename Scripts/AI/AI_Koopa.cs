@@ -107,17 +107,17 @@ public class AI_Koopa : EnemyAI
         }
 
         MarioControl m = CheckForMario();
-        if (m != null)
+        if (m != null && Health > 0)
         {
             if (Vector3.Distance(m.transform.position, transform.position) <= 1f)
             {
                 if (m.transform.position.y <= transform.position.y + 0.5f)
                 {
-                    if (!m.HasStar)
+                    if (!m.HasStar && StompCooldown <= 0)
                     {
                         m.TakeDamage();
                     }
-                    else
+                    else if(StompCooldown <= 0)
                     {
                         TakeDamage(true, m.BounceCombo);
                         m.BounceCombo++;
